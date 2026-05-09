@@ -1,0 +1,234 @@
+/*
+ * Design System: Cold Manifesto × Signal & Noise
+ * Typography: Playfair Display (heading) + Geist (body) + IBM Plex Mono (code/meta)
+ * Color: Off-white #FAFAFA / Ink #0D0D0D / Muted Steel #6B8CAE
+ * Philosophy: Text is design. Whitespace is pressure. Color signals meaning only.
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-steel: var(--steel);
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-geist);
+  --font-mono: var(--font-mono-ibm);
+}
+
+:root {
+  /* Cold Manifesto: Light Mode */
+  --radius: 0.125rem;
+  --background: oklch(0.98 0.002 240);
+  --foreground: oklch(0.1 0.005 240);
+  --card: oklch(0.96 0.003 240);
+  --card-foreground: oklch(0.1 0.005 240);
+  --popover: oklch(0.98 0.002 240);
+  --popover-foreground: oklch(0.1 0.005 240);
+  --primary: oklch(0.45 0.07 230);
+  --primary-foreground: oklch(0.98 0.002 240);
+  --secondary: oklch(0.93 0.004 240);
+  --secondary-foreground: oklch(0.3 0.008 240);
+  --muted: oklch(0.93 0.004 240);
+  --muted-foreground: oklch(0.52 0.012 240);
+  --accent: oklch(0.93 0.004 240);
+  --accent-foreground: oklch(0.1 0.005 240);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.88 0.006 240);
+  --input: oklch(0.88 0.006 240);
+  --ring: oklch(0.45 0.07 230);
+  --steel: oklch(0.55 0.07 230);
+
+  /* Font families */
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-geist: 'Geist', system-ui, -apple-system, sans-serif;
+  --font-mono-ibm: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+.dark {
+  /* Cold Manifesto: Dark Mode */
+  --background: oklch(0.08 0.005 240);
+  --foreground: oklch(0.92 0.004 240);
+  --card: oklch(0.12 0.006 240);
+  --card-foreground: oklch(0.92 0.004 240);
+  --popover: oklch(0.12 0.006 240);
+  --popover-foreground: oklch(0.92 0.004 240);
+  --primary: oklch(0.6 0.08 230);
+  --primary-foreground: oklch(0.08 0.005 240);
+  --secondary: oklch(0.16 0.007 240);
+  --secondary-foreground: oklch(0.75 0.006 240);
+  --muted: oklch(0.16 0.007 240);
+  --muted-foreground: oklch(0.55 0.012 240);
+  --accent: oklch(0.16 0.007 240);
+  --accent-foreground: oklch(0.92 0.004 240);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(1 0 0 / 0.08);
+  --input: oklch(1 0 0 / 0.1);
+  --ring: oklch(0.6 0.08 230);
+  --steel: oklch(0.65 0.08 230);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    font-family: var(--font-geist);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-geist);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-playfair);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  code, kbd, pre, .font-mono {
+    font-family: var(--font-mono-ibm);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+
+  ::selection {
+    background-color: oklch(0.45 0.07 230 / 0.2);
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      max-width: 1200px;
+    }
+  }
+
+  /* Section label style — small caps, muted, with line */
+  .section-label {
+    font-family: var(--font-mono-ibm);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  /* Keyword tag — monospace, bordered */
+  .keyword-tag {
+    font-family: var(--font-mono-ibm);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--border);
+    color: var(--muted-foreground);
+    display: inline-block;
+    line-height: 1.5;
+  }
+
+  /* Steel accent color */
+  .text-steel {
+    color: var(--steel);
+  }
+
+  /* Thin divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* Scroll fade-in animation */
+  .fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
