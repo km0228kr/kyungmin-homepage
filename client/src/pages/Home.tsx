@@ -210,7 +210,7 @@ export default function Home() {
             className="text-base md:text-lg text-muted-foreground leading-relaxed"
             style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
           >
-            AI 유행을 따라가는 것이 아니라,{" "}
+            {" "}
             <span className="text-foreground font-medium">
               AI 시대 인간과 지능 시스템의 무너짐과 개입
             </span>
