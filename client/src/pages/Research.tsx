@@ -147,7 +147,7 @@ export default function Research() {
           </div>
         </motion.div>
 
-        {/* Research Questions — 기존과 동일 */}
+        {/* Research Questions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -186,7 +186,7 @@ export default function Research() {
           </div>
         </motion.div>
 
-        {/* Open Problems — 기존과 동일 */}
+        {/* Open Problems */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -215,7 +215,7 @@ export default function Research() {
           </div>
         </motion.div>
 
-        {/* Links — 기존과 동일 (전 답변에서 알려준 대로 본인 URL로 바꿔야 함) */}
+        {/* Links */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -225,7 +225,7 @@ export default function Research() {
         >
           <p className="section-label mb-6">외부 링크</p>
           <div className="flex gap-6">
-            
+            <a
               href="https://github.com/km0228kr"
               target="_blank"
               rel="noopener noreferrer"
@@ -234,7 +234,7 @@ export default function Research() {
             >
               GitHub →
             </a>
-            
+            <a
               href="https://scholar.google.com"
               target="_blank"
               rel="noopener noreferrer"
