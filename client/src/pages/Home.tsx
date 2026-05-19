@@ -93,16 +93,16 @@ export default function Home() {
               className="text-2xl md:text-3xl lg:text-[2.5rem] font-semibold text-foreground leading-snug mb-6"
               style={{ fontFamily: "var(--font-playfair)", letterSpacing: "-0.02em" }}
             >
-              무너짐 직전의 신호를 읽고,
+              보이지 않는 변화를 읽고,
               <br />
-              개입하는 지능을 만듭니다.
+              더 나은 결과를 만드는 AI를 연구합니.
             </h2>
             <p
               className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl"
               style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
             >
-              인간과 AI 시스템이 어떻게 편향되고, 흔들리고,
-              무너지고, 회복되는지 연구합니다.
+              학습자의 상태와 이탈 가능성을 예측하고,
+              AI 시스템의 편향과 판단 왜곡을 완화하는 연구를 합니다
             </p>
           </motion.div>
 
