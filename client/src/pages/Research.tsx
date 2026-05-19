@@ -225,26 +225,25 @@ export default function Research() {
         >
           <p className="section-label mb-6">외부 링크</p>
           <div className="flex gap-6">
-  <a
-    href="https://github.com/km0228kr"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-sm text-steel hover:text-foreground transition-colors duration-200"
-    style={{ fontFamily: "var(--font-mono-ibm)" }}
-  >
-    GitHub →
-  </a>
-
-  <a
-    href="https://scholar.google.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="text-sm text-steel hover:text-foreground transition-colors duration-200"
-    style={{ fontFamily: "var(--font-mono-ibm)" }}
-  >
-    Google Scholar →
-  </a>
-</div>
+            
+              href="https://github.com/km0228kr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-steel hover:text-foreground transition-colors duration-200"
+              style={{ fontFamily: "var(--font-mono-ibm)" }}
+            >
+              GitHub →
+            </a>
+            
+              href="https://scholar.google.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-steel hover:text-foreground transition-colors duration-200"
+              style={{ fontFamily: "var(--font-mono-ibm)" }}
+            >
+              Google Scholar →
+            </a>
+          </div>
         </motion.div>
       </div>
     </div>
