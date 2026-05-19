@@ -95,7 +95,7 @@ export default function Home() {
             >
               보이지 않는 변화를 읽고,
               <br />
-              더 나은 결과를 만드는 AI를 연구합니.
+              더 나은 결과를 만드는 AI를 연구합니다.
             </h2>
             <p
               className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl"
