@@ -102,6 +102,7 @@ export default function Home() {
               style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
             >
               학습자의 상태와 이탈 가능성을 예측하고,
+              <br />
               AI 시스템의 편향과 판단 왜곡을 완화하는 연구를 합니다
             </p>
           </motion.div>
