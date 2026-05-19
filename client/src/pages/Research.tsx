@@ -1,46 +1,6 @@
-/*
- * Research: Cold Manifesto × Signal & Noise
- * Paper-centric layout, research questions, open problems
- * No skill bars, no tech stack lists
- */
-
 import { motion } from "framer-motion";
-
-const currentResearch = [
-  {
-    title: "LLM 내부 편향의 기하학적 구조",
-    description: "대형 언어 모델의 잠재 공간에서 편향이 어떤 방향 벡터로 인코딩되어 있는지 분석한다. Bias Direction을 식별하고, 이를 제거하거나 조작하는 방법을 연구한다.",
-    keywords: ["Bias Geometry", "Representation Space", "Direction Vector"],
-    status: "진행 중",
-  },
-  {
-    title: "Machine Unlearning과 지식 구조",
-    description: "특정 지식을 모델에서 제거할 때 인접 지식에 미치는 영향을 측정한다. 망각의 범위와 정확도 사이의 트레이드오프를 분석한다.",
-    keywords: ["Machine Unlearning", "Knowledge Structure", "Forgetting"],
-    status: "진행 중",
-  },
-  {
-    title: "Multi-agent 시스템의 사회적 동조 편향",
-    description: "다수의 LLM 에이전트가 상호작용할 때 발생하는 집단적 편향 패턴을 연구한다. 소수 의견이 억압되는 메커니즘과 그 조건을 분석한다.",
-    keywords: ["Social Conformity Bias", "Multi-agent", "Collective Behavior"],
-    status: "설계 중",
-  },
-];
-
-const papers = [
-  {
-    title: "Bias Geometry in Large Language Models: Mapping and Mitigation",
-    venue: "준비 중",
-    year: "2025",
-    abstract: "LLM의 잠재 공간에서 편향의 기하학적 표현을 분석하고, 방향 벡터 기반 편향 제거 방법론을 제안한다.",
-  },
-  {
-    title: "Selective Forgetting: Precision Unlearning in Neural Language Models",
-    venue: "준비 중",
-    year: "2025",
-    abstract: "Machine Unlearning의 정밀도를 높이면서 인접 지식 손상을 최소화하는 방법을 연구한다.",
-  },
-];
+import { Link } from "wouter";
+import { currentResearch, papers } from "@/data/research";
 
 const researchQuestions = [
   "편향은 모델의 어느 레이어에, 어떤 형태로 존재하는가?",
@@ -61,7 +21,6 @@ export default function Research() {
   return (
     <div className="min-h-screen px-8 md:px-16 lg:px-20 py-24 md:py-32">
       <div className="max-w-2xl">
-        {/* Section label */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -85,37 +44,45 @@ export default function Research() {
           <div className="space-y-10">
             {currentResearch.map((item, i) => (
               <motion.div
-                key={item.title}
+                key={item.slug}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ delay: i * 0.08, duration: 0.55, ease: "easeOut" }}
               >
-                <div className="flex items-start justify-between gap-4 mb-3">
-                  <h3
-                    className="text-lg md:text-xl font-semibold text-foreground leading-snug"
-                    style={{ fontFamily: "var(--font-playfair)" }}
-                  >
-                    {item.title}
-                  </h3>
-                  <span
-                    className="shrink-0 text-xs text-steel mt-1"
-                    style={{ fontFamily: "var(--font-mono-ibm)" }}
-                  >
-                    {item.status}
-                  </span>
-                </div>
-                <p
-                  className="text-sm text-muted-foreground leading-relaxed mb-4"
-                  style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
+                <Link
+                  href={`/research/${item.slug}`}
+                  className="block group cursor-pointer"
                 >
-                  {item.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {item.keywords.map((kw) => (
-                    <span key={kw} className="keyword-tag">{kw}</span>
-                  ))}
-                </div>
+                  <div className="flex items-start justify-between gap-4 mb-3">
+                    <h3
+                      className="text-lg md:text-xl font-semibold text-foreground leading-snug transition-colors duration-200 group-hover:text-steel"
+                      style={{ fontFamily: "var(--font-playfair)" }}
+                    >
+                      {item.title}
+                      <span className="ml-2 inline-block opacity-0 -translate-x-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0">
+                        →
+                      </span>
+                    </h3>
+                    <span
+                      className="shrink-0 text-xs text-steel mt-1"
+                      style={{ fontFamily: "var(--font-mono-ibm)" }}
+                    >
+                      {item.status}
+                    </span>
+                  </div>
+                  <p
+                    className="text-sm text-muted-foreground leading-relaxed mb-4"
+                    style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
+                  >
+                    {item.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {item.keywords.map((kw) => (
+                      <span key={kw} className="keyword-tag">{kw}</span>
+                    ))}
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -136,47 +103,51 @@ export default function Research() {
           <div className="space-y-8">
             {papers.map((paper, i) => (
               <motion.div
-                key={paper.title}
+                key={paper.slug}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ delay: i * 0.08, duration: 0.55, ease: "easeOut" }}
-                className="border-l-2 border-border pl-6"
               >
-                <div className="flex items-start gap-3 mb-2">
-                  <span
-                    className="text-xs text-muted-foreground mt-0.5"
-                    style={{ fontFamily: "var(--font-mono-ibm)" }}
-                  >
-                    {paper.year}
-                  </span>
-                  <div>
-                    <h4
-                      className="text-base font-medium text-foreground leading-snug mb-1"
-                      style={{ fontFamily: "var(--font-geist)" }}
-                    >
-                      {paper.title}
-                    </h4>
-                    <p
-                      className="text-xs text-steel mb-3"
+                <Link
+                  href={`/papers/${paper.slug}`}
+                  className="block group border-l-2 border-border pl-6 transition-colors duration-200 hover:border-foreground"
+                >
+                  <div className="flex items-start gap-3 mb-2">
+                    <span
+                      className="text-xs text-muted-foreground mt-0.5"
                       style={{ fontFamily: "var(--font-mono-ibm)" }}
                     >
-                      {paper.venue}
-                    </p>
-                    <p
-                      className="text-sm text-muted-foreground leading-relaxed"
-                      style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
-                    >
-                      {paper.abstract}
-                    </p>
+                      {paper.year}
+                    </span>
+                    <div>
+                      <h4
+                        className="text-base font-medium text-foreground leading-snug mb-1 transition-colors duration-200 group-hover:text-steel"
+                        style={{ fontFamily: "var(--font-geist)" }}
+                      >
+                        {paper.title}
+                      </h4>
+                      <p
+                        className="text-xs text-steel mb-3"
+                        style={{ fontFamily: "var(--font-mono-ibm)" }}
+                      >
+                        {paper.venue}
+                      </p>
+                      <p
+                        className="text-sm text-muted-foreground leading-relaxed"
+                        style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
+                      >
+                        {paper.abstract}
+                      </p>
+                    </div>
                   </div>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* Research Questions */}
+        {/* Research Questions — 기존과 동일 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -215,7 +186,7 @@ export default function Research() {
           </div>
         </motion.div>
 
-        {/* Open Problems */}
+        {/* Open Problems — 기존과 동일 */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -244,7 +215,7 @@ export default function Research() {
           </div>
         </motion.div>
 
-        {/* Links */}
+        {/* Links — 기존과 동일 (전 답변에서 알려준 대로 본인 URL로 바꿔야 함) */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -254,8 +225,8 @@ export default function Research() {
         >
           <p className="section-label mb-6">외부 링크</p>
           <div className="flex gap-6">
-            <a
-              href="https://github.com"
+            
+              href="https://github.com/km0228kr"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-steel hover:text-foreground transition-colors duration-200"
@@ -263,7 +234,7 @@ export default function Research() {
             >
               GitHub →
             </a>
-            <a
+            
               href="https://scholar.google.com"
               target="_blank"
               rel="noopener noreferrer"
