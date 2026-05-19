@@ -38,10 +38,10 @@ export default function About() {
             className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight mb-8"
             style={{ fontFamily: "var(--font-playfair)", letterSpacing: "-0.02em" }}
           >
-            나는 편향과 이탈의 패턴을 읽고,
+            편향과 이탈의 패턴을 읽고,
 
             <br />
-            더 나은 방향으로 되돌리는 AI를 연구합니다.
+            더 나은 방향 AI를 연구합니다.
           </h2>
           <div className="space-y-5 text-muted-foreground leading-relaxed" style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}>
             <p className="text-base md:text-lg">
