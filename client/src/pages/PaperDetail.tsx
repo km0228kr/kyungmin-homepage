@@ -99,7 +99,7 @@ export default function PaperDetail() {
             <p className="section-label mb-6">링크</p>
             <div className="flex gap-6">
               {paper.pdfUrl && (
-                
+                <a
                   href={paper.pdfUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -110,7 +110,7 @@ export default function PaperDetail() {
                 </a>
               )}
               {paper.arxivUrl && (
-                
+                <a
                   href={paper.arxivUrl}
                   target="_blank"
                   rel="noopener noreferrer"
