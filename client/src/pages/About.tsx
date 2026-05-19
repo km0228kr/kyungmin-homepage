@@ -17,7 +17,7 @@ const fadeUp = (i: number) => ({
 });
 
 const positions = [
-  { label: "소속", value: "성균관대학교 인공지능융합학과 석사과정" },
+  { label: "소속", value: "성균관대학교 인공지능융합학과 석사" },
   { label: "역할", value: "AI 연구자 · AI 교육 스타트업 창업자" },
   { label: "연구", value: "LLM Bias · Machine Unlearning · Bias Geometry" },
   { label: "위치", value: "Seoul, Korea" },
@@ -38,9 +38,10 @@ export default function About() {
             className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight mb-8"
             style={{ fontFamily: "var(--font-playfair)", letterSpacing: "-0.02em" }}
           >
-            나는 무너짐의 패턴을
+            나는 편향과 이탈의 패턴을 읽고,
+
             <br />
-            연구하는 사람입니다.
+            더 나은 방향으로 되돌리는 AI를 연구합니다.
           </h2>
           <div className="space-y-5 text-muted-foreground leading-relaxed" style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}>
             <p className="text-base md:text-lg">
