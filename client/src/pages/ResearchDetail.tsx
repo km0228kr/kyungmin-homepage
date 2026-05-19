@@ -1,17 +1,17 @@
 import { motion } from "framer-motion";
 import { Link, useParams } from "wouter";
-import { currentResearch } from "@/data/research";
+import { papers } from "@/data/research";
 
-export default function ResearchDetail() {
+export default function PaperDetail() {
   const params = useParams<{ slug: string }>();
-  const item = currentResearch.find((r) => r.slug === params.slug);
+  const paper = papers.find((p) => p.slug === params.slug);
 
-  if (!item) {
+  if (!paper) {
     return (
       <div className="min-h-screen px-8 md:px-16 lg:px-20 py-24 md:py-32">
         <div className="max-w-2xl">
           <p className="text-sm text-muted-foreground mb-6">
-            해당 연구를 찾을 수 없습니다.
+            해당 논문을 찾을 수 없습니다.
           </p>
           <Link
             href="/research"
@@ -49,70 +49,80 @@ export default function ResearchDetail() {
           transition={{ delay: 0.1, duration: 0.5 }}
           className="mb-16"
         >
-          <div className="flex items-start justify-between gap-4 mb-4">
-            <h1
-              className="text-2xl md:text-3xl font-semibold text-foreground leading-tight"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              {item.title}
-            </h1>
-            <span
-              className="shrink-0 text-xs text-steel mt-2"
-              style={{ fontFamily: "var(--font-mono-ibm)" }}
-            >
-              {item.status}
-            </span>
-          </div>
           <p
-            className="text-base text-muted-foreground leading-relaxed"
-            style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
+            className="text-xs text-steel mb-3"
+            style={{ fontFamily: "var(--font-mono-ibm)" }}
           >
-            {item.description}
+            {paper.year} · {paper.venue}
+          </p>
+          <h1
+            className="text-2xl md:text-3xl font-semibold text-foreground leading-tight mb-4"
+            style={{ fontFamily: "var(--font-geist)" }}
+          >
+            {paper.title}
+          </h1>
+          <p
+            className="text-xs text-steel"
+            style={{ fontFamily: "var(--font-mono-ibm)" }}
+          >
+            {paper.authors.join(", ")}
           </p>
         </motion.div>
-
-        {[
-          { label: "배경", body: item.background },
-          { label: "방법론", body: item.approach },
-          { label: "진행 상황", body: item.progress },
-        ].map((section, i) => (
-          <motion.section
-            key={section.label}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ delay: i * 0.08, duration: 0.5 }}
-            className="mb-16"
-          >
-            <div className="flex items-center gap-4 mb-6">
-              <span className="section-label">{section.label}</span>
-              <div className="flex-1 h-px bg-border" />
-            </div>
-            <p
-              className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line"
-              style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
-            >
-              {section.body}
-            </p>
-          </motion.section>
-        ))}
 
         <motion.section
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5 }}
+          className="mb-16"
         >
           <div className="flex items-center gap-4 mb-6">
-            <span className="section-label">키워드</span>
+            <span className="section-label">Abstract</span>
             <div className="flex-1 h-px bg-border" />
           </div>
-          <div className="flex flex-wrap gap-2">
-            {item.keywords.map((kw) => (
-              <span key={kw} className="keyword-tag">{kw}</span>
-            ))}
-          </div>
+          <p
+            className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line"
+            style={{ fontFamily: "var(--font-geist)", fontWeight: 300 }}
+          >
+            {paper.fullAbstract}
+          </p>
         </motion.section>
+
+        {(paper.pdfUrl || paper.arxivUrl) && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5 }}
+            className="border-t border-border pt-10"
+          >
+            <p className="section-label mb-6">링크</p>
+            <div className="flex gap-6">
+              {paper.pdfUrl && (
+                
+                  href={paper.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-steel hover:text-foreground transition-colors duration-200"
+                  style={{ fontFamily: "var(--font-mono-ibm)" }}
+                >
+                  PDF →
+                </a>
+              )}
+              {paper.arxivUrl && (
+                
+                  href={paper.arxivUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-steel hover:text-foreground transition-colors duration-200"
+                  style={{ fontFamily: "var(--font-mono-ibm)" }}
+                >
+                  arXiv →
+                </a>
+              )}
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
