@@ -14,6 +14,8 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Research from "./pages/Research";
+import ResearchDetail from "./pages/ResearchDetail";
+import PaperDetail from "./pages/PaperDetail";
 import Startup from "./pages/Startup";
 import Writing from "./pages/Writing";
 import Media from "./pages/Media";
@@ -25,7 +27,11 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
+
+        <Route path="/research/:slug" component={ResearchDetail} />
+        <Route path="/papers/:slug" component={PaperDetail} />
         <Route path="/research" component={Research} />
+
         <Route path="/startup" component={Startup} />
         <Route path="/writing" component={Writing} />
         <Route path="/media" component={Media} />
