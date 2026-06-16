@@ -1,9 +1,3 @@
-/*
- * App: Cold Manifesto × Signal & Noise
- * Routes: /, /about, /research, /research/signcv, /research/:slug,
- *         /papers/:slug, /startup, /writing, /media, /contact
- * Default theme: dark (차갑고 선명한 다크 기반)
- */
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -19,6 +13,7 @@ import PaperDetail from "./pages/PaperDetail";
 import SignCV from "./pages/SignCV";
 import Startup from "./pages/Startup";
 import Writing from "./pages/Writing";
+import WritingDetail from "./pages/WritingDetail";
 import Media from "./pages/Media";
 import Contact from "./pages/Contact";
 
@@ -28,12 +23,12 @@ function Router() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/about" component={About} />
-        {/* SignCV must come BEFORE the generic /research/:slug */}
         <Route path="/research/signcv" component={SignCV} />
         <Route path="/research/:slug" component={ResearchDetail} />
         <Route path="/papers/:slug" component={PaperDetail} />
         <Route path="/research" component={Research} />
         <Route path="/startup" component={Startup} />
+        <Route path="/writing/:slug" component={WritingDetail} />
         <Route path="/writing" component={Writing} />
         <Route path="/media" component={Media} />
         <Route path="/contact" component={Contact} />
