@@ -1,4 +1,4 @@
-import { unlearningSprintPosts } from "./unlearningSprintPosts";
+import { unlearningEssayPosts } from "./unlearningEssayPosts";
 
 export type WritingPost = {
   slug: string;
@@ -13,87 +13,7 @@ export type WritingPost = {
 };
 
 export const writingPosts: WritingPost[] = [
-  ...unlearningSprintPosts,
-  {
-    slug: "unlearning-log-01-tofu",
-    date: "2026.06",
-    title: "[Unlearning Log 01] TOFU는 왜 중요한가: LLM은 정말 잊었는가",
-    description:
-      "Unlearning을 한다고 말하는 건 쉽다. 어려운 건 모델이 진짜로 잊었는지, 아니면 대답만 피하는지 구분하는 일이다.",
-    tags: ["Machine Unlearning", "LLM", "Evaluation"],
-    category: "Unlearning Research Log",
-    sourceTitle: "TOFU: A Task of Fictitious Unlearning for LLMs",
-    sourceUrl: "https://arxiv.org/abs/2401.06121",
-    content: `이 글은 내 Unlearning 기록의 첫 번째 글이다.
-
-나는 요즘 LLM Unlearning과 Multimodal Unlearning을 같이 보고 있다. 그런데 계속 걸리는 지점이 있다. 지웠다고 말하는 건 쉬운데, 진짜 지웠는지는 어떻게 보나.
-
-TOFU는 이 질문을 정면으로 건드린다. 모델에서 특정 데이터를 지우는 것처럼 튜닝했을 때, 그 모델이 정말 처음부터 그 데이터를 학습하지 않은 모델처럼 행동하는지 보는 벤치마크다. 여기서 중요한 건 단순히 정답률이 떨어졌는지가 아니다. 모델이 forget set에 대해서는 잊고, retain set에 대해서는 멀쩡해야 한다. 더 나아가 주변 지식, 일반 능력, 언어 능력이 무너지면 그건 unlearning이 아니라 그냥 모델을 망가뜨린 것이다.
-
-내 프로젝트에서 바로 가져갈 지점은 이거다. TOFU의 forget/retain 구조를 multimodal로 바꾼다. forget set은 image-text paired concept로 만들고, retain set은 semantic neighbor로 둔다. 그리고 평가를 세 갈래로 본다. text prompt에서 target 정보가 새는지, image prompt에서 target 정보가 새는지, image+text 조합에서 다시 복원되는지 본다.
-
-결론은 단순하다. Unlearning은 삭제 기술이 아니라 검증 기술부터 세워야 한다. 내가 앞으로 만들고 싶은 건 잘 지웠다고 주장하는 모델이 아니라, 어디서 새는지 끝까지 잡아내는 평가 프레임워크다. 진짜 연구는 거기서 시작된다.`,
-  },
-  {
-    slug: "unlearning-log-02-rome-memit",
-    date: "2026.06",
-    title: "[Unlearning Log 02] ROME과 MEMIT: Knowledge Editing은 Unlearning이 될 수 있는가",
-    description:
-      "Knowledge editing은 지식을 고치는 기술이다. 그런데 지식을 고칠 수 있다면, 지울 수도 있는가. 여기서 Unlearning의 핵심 질문이 열린다.",
-    tags: ["Knowledge Editing", "ROME", "MEMIT", "LLM"],
-    category: "Unlearning Research Log",
-    sourceTitle: "ROME / MEMIT",
-    sourceUrl: "https://arxiv.org/abs/2202.05262",
-    content: `ROME과 MEMIT을 보면 계속 같은 생각이 든다. 모델 안의 지식은 정말 어딘가에 저장되어 있는가. 그리고 저장되어 있다면, 그걸 찾아서 직접 바꿀 수 있는가.
-
-ROME은 factual association이 transformer의 특정 middle-layer MLP 쪽에 강하게 관여한다고 보고, rank-one update로 지식을 바꾼다. MEMIT은 이걸 여러 개의 memory edit으로 확장한다. 둘 다 원래 목적은 unlearning이라기보다 model editing에 가깝다. 하지만 내 입장에서는 이게 중요하다. unlearning도 결국 모델 내부의 특정 association을 약화시키거나 끊는 문제로 볼 수 있기 때문이다.
-
-다만 editing은 A를 B로 바꾸는 문제고, unlearning은 A를 없애는 문제다. editing은 새 답을 심으면 된다. unlearning은 새 답 없이 target knowledge retrieval 자체를 막아야 한다. 그래서 ROME/MEMIT을 그대로 가져와서 삭제 방향으로 쓰면 끝나는 문제가 아니다.
-
-내 프로젝트 변형은 이렇다. ROME/MEMIT의 where is knowledge stored 질문을 VLM으로 가져간다. LLaVA나 CLIP-LLaMA 계열에서 특정 visual concept를 넣고, answer logit이 튀는 activation path를 찾는다. 그 다음 weight edit을 바로 하지 않고, 먼저 activation suppression이나 low-rank adapter로 reversible하게 막아본다.
-
-Knowledge editing은 unlearning의 답은 아니지만, unlearning을 mechanistic하게 만들 수 있는 강한 도구다. 내가 원하는 건 그냥 loss를 올려서 잊게 만드는 게 아니다. 모델이 target을 꺼내는 길을 찾아서, 그 길만 끊는 것이다.`,
-  },
-  {
-    slug: "unlearning-log-03-concept-erasure",
-    date: "2026.06",
-    title: "[Unlearning Log 03] Concept Erasure는 왜 Multimodal Unlearning으로 이어지는가",
-    description:
-      "Diffusion model에서 concept를 지우는 문제는 단순 이미지 생성 문제가 아니다. Multimodal Unlearning이 결국 마주칠 미래형 문제다.",
-    tags: ["Concept Erasure", "Diffusion", "Multimodal Unlearning"],
-    category: "Unlearning Research Log",
-    sourceTitle: "Erasing Concepts from Diffusion Models",
-    sourceUrl: "https://arxiv.org/abs/2303.07345",
-    content: `Concept erasure 논문을 보면 unlearning이 어디로 가야 하는지 보인다. 데이터 하나를 지우는 수준이 아니라, 모델이 어떤 concept 자체를 만들지 못하게 하는 문제다.
-
-Diffusion model에서 특정 artist style이나 visual concept를 지우는 건 겉으로 보면 이미지 생성 safety 문제처럼 보인다. 그런데 더 깊게 보면 이건 multimodal unlearning 문제다. concept는 보통 텍스트 prompt와 visual pattern 사이에 걸쳐 있기 때문이다. 텍스트로 부르면 이미지가 나오고, 이미지에서 다시 텍스트 의미가 살아난다. 이 연결을 끊어야 진짜로 지운 것이다.
-
-내가 여기서 보는 핵심은 concept는 데이터보다 크다는 점이다. 어떤 사진 몇 장을 지운다고 identity가 사라지는 게 아니다. 이름, 얼굴, 장소, 맥락, 스타일, caption이 전부 연결되어 있다. 그래서 multimodal unlearning은 sample deletion보다 concept boundary를 어떻게 잡을지가 훨씬 중요하다.
-
-내 프로젝트에서는 target concept에 대해 세 가지 leakage를 본다. visual generation leakage, visual recognition leakage, text reasoning leakage다. 이 셋 중 하나라도 살아 있으면 완전한 unlearning이 아니다.
-
-앞으로의 unlearning은 데이터 삭제보다 concept control 싸움이다. 특히 multimodal model에서는 concept가 modality 사이를 타고 도망간다. 그 도망가는 경로를 잡는 게 내 연구의 핵심이 될 수 있다.`,
-  },
-  {
-    slug: "unlearning-log-04-representation-surgery",
-    date: "2026.06",
-    title: "[Unlearning Log 04] Representation Surgery: weight가 아니라 latent를 지우는 쪽으로",
-    description:
-      "내가 지금 제일 강하게 보는 방향. 모델을 다시 학습시키는 게 아니라, target concept가 지나가는 latent path를 잡아서 끊는 것.",
-    tags: ["Representation Surgery", "Activation Steering", "SAE", "VLM"],
-    category: "Unlearning Research Log",
-    content: `요즘 내가 제일 강하게 보는 방향은 representation surgery다. 정확히 말하면 weight를 바로 지우는 게 아니라, 모델 내부에서 target concept가 지나가는 latent path를 찾고 그 경로만 건드리는 방식이다.
-
-왜 이게 중요하냐면, unlearning에서 제일 큰 문제는 모델을 망가뜨리는 것이다. target 하나 지우겠다고 전체 성능이 떨어지면 연구적으로도 실용적으로도 별 의미가 없다. 그래서 나는 parameter-level deletion보다 activation-level control이 더 좋은 출발점이라고 본다.
-
-Activation steering은 이 생각과 잘 맞는다. 어떤 concept direction이 있으면 inference 중간에서 그 방향을 빼거나 약화시킬 수 있다. 이 방식의 장점은 reversible하다는 것이다. 영구 삭제 전에 먼저 이 direction이 정말 target behavior를 만든다는 걸 확인할 수 있다.
-
-Sparse Autoencoder도 여기서 들어온다. SAE는 복잡한 activation을 더 해석 가능한 sparse feature로 풀어준다. target visual concept나 identity-related feature를 찾을 수 있다면, unlearning은 훨씬 정밀해진다.
-
-내 프로젝트에서 바로 만들 수 있는 최소 실험은 이렇다. CLIP이나 LLaVA에서 target concept image/text pair를 넣고 activation을 저장한다. target과 non-target의 mean difference로 concept direction을 잡는다. 그 direction을 특정 layer에서 projection subtraction으로 제거한다. 그리고 VQA, captioning, retrieval score가 어떻게 바뀌는지 본다.
-
-중요한 건 unlearning을 gradient로 밀어붙이는 게 아니라, 모델 내부의 길을 보고 정확히 자르는 것이다. 이 방향이 진짜 세다.`,
-  },
+  ...unlearningEssayPosts,
   {
     slug: "ai-direction-loss",
     date: "2025.04",
